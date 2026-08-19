@@ -1,27 +1,15 @@
-def get_human_age(cat_years: int, dog_years: int) -> list:
-    def calc_age(months: int, is_cat: bool) -> int:
+def get_human_age(cat_age: int, dog_age: int) -> list[int]:
+    """Calculate human age for cats and dogs based on their pet age in months."""
+    def calc_age(months: int, increment_divisor: int) -> int:
         if months < 15:
             return 0
-        elif 15 <= months <= 23:
+        if 15 <= months <= 23:
             return 1
-        elif 24 <= months <= 27:
+        if 24 <= months <= 27:
             return 2
         
-        # 28 months and above
-        # At 28 months: cat = 3 human years, dog = 3 human years
         base_years = 3
         extra_months = months - 28
-        
-        if is_cat:
-            increment = extra_months // 4
-        else:
-            increment = extra_months // 5
-            
-        return base_years + increment
+        return base_years + (extra_months // increment_divisor)
 
-    return [calc_age(cat_years, True), calc_age(dog_years, False)]
-
-
-if __name__ == "__main__":
-    pass
-
+    return [calc_age(cat_age, 4), calc_age(dog_age, 5)]
